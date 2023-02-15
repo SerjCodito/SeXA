@@ -1,7 +1,7 @@
 import openai
 import random
 
-openai.api_key = "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"
+openai.api_key = "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"
 engine = "text-davinci-003"
 
 industry_options = ["Finance", "Technology", "Healthcare", "Retail", "Education", "Energy", "Hospitality", "Real Estate", "Entertainment", "Transportation", "Manufacturing", "Construction", "Agriculture",
@@ -12,9 +12,9 @@ greek_names = ["Alexandros", "Andreas", "Christina", "Dimitrios", "Eleni", "Geor
 
 # Prompt user for required information
 industry = input(f"Choose an industry from {industry_options}: ")
-service_info = input(
-    "Enter information about your business and the services/product you offer: ")
 
+service_info = input("Enter information about your services or product: ")
+industry_name = input("Enter the business name: ")
 
 prompt = f"Generate 10 unique examples of ideal customers for a company in the {industry} industry that offers similar solutions to this information: {service_info}. The ideal customers should suffer a lot from not having the solution to their problem."
 response = openai.Completion.create(
@@ -27,14 +27,12 @@ generated_examples = []
 for choice in choices:
     generated_examples.append(choice.strip())
 
+
 target_audience = ""
 for i, choice in enumerate(generated_examples):
-    print(f"{choice.strip()}")
-target_choice = int(input(
-    f"Choose your target audience from the options above (1-{len(generated_examples)}): "))
-target_audience = generated_examples[target_choice-1].strip()
-
-industry_name = input("Enter the name of the company in the industry: ")
+    print(f"{i+1}. {choice.strip()}")
+choice_index = input(
+    f"Please select one of the above options (enter a number from 1-{len(generated_examples)}): ")
 
 
 prompt2 = f"Do a competitor research to understand better what problems does the product/service solve, on 5 top brands in the {industry} industry similar to the information provided here, {service_info} Then act as a professional website copywriter and write an about us section for {industry_name}, explaining exactly what they do and what problems they help solve. I need you to combine the information the user will prompt and the information you will find online."
