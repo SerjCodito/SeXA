@@ -1,7 +1,7 @@
 import openai
 import random
 
-openai.api_key = "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"
+openai.api_key = "API"
 engine = "text-davinci-003"
 
 industry_options = ["Finance", "Technology", "Healthcare", "Retail", "Education", "Energy", "Hospitality", "Real Estate", "Entertainment", "Transportation", "Manufacturing", "Construction", "Agriculture",
