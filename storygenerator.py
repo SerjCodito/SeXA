@@ -1,7 +1,7 @@
 import openai
 import random
 
-openai.api_key = "API"
+openai.api_key = "YOUR-API-KEY_HERE"
 engine = "text-davinci-003"
 
 industry_options = ["Finance", "Technology", "Healthcare", "Retail", "Education", "Energy", "Hospitality", "Real Estate", "Entertainment", "Transportation", "Manufacturing", "Construction", "Agriculture",
@@ -16,28 +16,10 @@ industry = input(f"Choose an industry from {industry_options}: ")
 
 service_info = input("Enter information about your services or product: ")
 industry_name = input("Enter the business name: ")
-
-prompt = f"Generate 10 unique examples of ideal customers for a company in the {industry} industry that offers similar solutions to this information: {service_info}. The ideal customers should suffer a lot from not having the solution to their problem. The ideal customers must be identified by the following question.\n{chr(10).join(questions)}"
-
-response = openai.Completion.create(
-    engine=engine, prompt=prompt, max_tokens=1024, temperature=0.5, best_of=2)
-
-choices = response.choices[0].text.strip().split("\n")
-
-# Store generated examples in an array
-generated_examples = []
-for choice in choices:
-    generated_examples.append(choice.strip())
+target_audience = input("Please enter in details your ideal customer: ")
 
 
-target_audience = ""
-for i, choice in enumerate(generated_examples):
-    print(f"{i+1}. {choice.strip()}")
-choice_index = input(
-    f"Please select one of the above options (enter a number from 1-{len(generated_examples)}): ")
-
-
-prompt2 = f"Do a competitor research to fully understand what problems the product/service solve, on 5 top brands in the {industry} industry similar to the information provided here, {service_info} Then act as a professional website copywriter and write an about us section for {industry_name}, explaining exactly what they do and what problems they help solve. I need you to combine the information the user will prompt and the information you will find online."
+prompt2 = f"Do a competitor research to fully understand what problems the product/service solve, on 5 top USA brands in the {industry} industry  similar to the information provided here, {service_info} Then act as a professional website copywriter and write an about us section for {industry_name}, explaining exactly what they do and what problems they help solve. I need you to combine the information the user will enter with the information you will find online."
 response = openai.Completion.create(
     engine=engine, prompt=prompt2, max_tokens=1024, n=10, stop=None, temperature=0.5)
 
